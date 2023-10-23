@@ -1,6 +1,9 @@
 BEGIN {
-  # SeparatedValue=", "
-  SeparatedValue="\t"
+  if (FORMAT=="TSV") {
+    SeparatedValue="\t"
+  } else {
+    SeparatedValue=", "
+  }
 }
 
 /^%Cpu\(s\): / {
