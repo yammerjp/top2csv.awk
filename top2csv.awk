@@ -72,8 +72,10 @@ END {
   print_all_params()
 }
 
-function add_param(profile_type, param) {
-  profiles[profile_type][length(profiles[profile_type]) + 1] = param
+function add_param(profile_type, param,     l) {
+  l = 1 + profiles_length[profile_type]
+  profiles_length[profile_type] = l
+  profiles[profile_type,l] = param
 }
 
 function print_all_params() {
@@ -108,15 +110,12 @@ function print_all_params() {
 
 function print_params(profile_type) {
   printf profile_type SeparatedValue
-  print_arr(profiles[profile_type])
-}
 
-function print_arr(arr) {
-  for(i=1;i<=length(arr);i++) {
+  for(i=1;i<=profiles_length[profile_type];i++) {
     if (i>1) {
       printf SeparatedValue
     }
-    printf arr[i]
+    printf profiles[profile_type,i]
   }
   printf "\n"
 }
